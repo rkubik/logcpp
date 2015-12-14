@@ -1,0 +1,7 @@
+install( DIRECTORY ${PROJECT_SOURCE_DIR}/include/logcpp
+  DESTINATION usr/include
+  USE_SOURCE_PERMISSIONS
+  FILES_MATCHING
+  PATTERN "*.hpp"
+  PATTERN "utility.hpp" EXCLUDE
+)

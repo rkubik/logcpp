@@ -1,0 +1,27 @@
+Source: logcpp
+Priority: extra
+Maintainer: Russ Kubik <russkubik@gmail.com>
+Build-Depends: debhelper (>= 7.0.0), cmake
+Standards-Version: 3.9.3
+Section: non-free/embedded
+
+Package: liblogcpp0
+Section: non-free/embedded
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Library for logging for C++
+ Light-weight logging library
+
+Package: liblogcpp-dev
+Section: non-free/libdevel
+Architecture: any
+Depends: liblogcpp0 (= ${binary:Version}), ${misc:Depends}
+Description: Library for logging for C++ (devel)
+ Installs the liblogcpp package and accompanying header
+
+Package: liblogcpp0-dbg
+Section: debug
+Architecture: any
+Depends: liblogcpp0 (= ${binary:Version}), ${misc:Depends}
+Description: liblogcpp0 debug symbols
+ Debugging symbols for liblogcpp library

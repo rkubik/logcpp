@@ -1,0 +1,11 @@
+logcpp (0.1.1) unstable; urgency=medium
+
+  * Formatter and FileRotateLogger virtual methods for more control
+
+ -- Russ Kubik <russkubik@gmail.com>  Mon, 14 Dec 2015 10:09:36 -0600
+
+logcpp (0.1.0) unstable; urgency=medium
+
+  * Initial commit
+
+ -- Russ Kubik <russkubik@gmail.com>  Tue, 15 Sep 2015 12:05:46 -0600
