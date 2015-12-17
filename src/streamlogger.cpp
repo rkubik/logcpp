@@ -24,7 +24,7 @@ StreamLogger::~StreamLogger()
 
 void StreamLogger::SetStream(ostream* stream, bool ownsStream)
 {
-    if (m_OwnsStream)
+    if (m_Stream && m_OwnsStream)
         delete m_Stream;
 
     m_Stream = stream;
