@@ -9,7 +9,7 @@ Simple Thread-Safe C++11 logging library.
 - cmake
 - debuild (optional)
 
-# Build
+## Build
 
 You can build and install the shared library and header with cmake or use
 debuild to create Debian packages.
