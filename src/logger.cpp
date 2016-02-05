@@ -11,7 +11,7 @@ mutex Logger::m_LMutex;
 
 Logger::Logger(void)
 :
-m_Severity(LogWarning),
+m_Severity(LogCritical),
 m_Formatter(new BasicFormatter())
 {
 }
@@ -89,8 +89,9 @@ Logger::Ptr Logger::GetLogger(const string& loggerName)
     for(const Logger::Ptr& logger : Logger::GetLoggers()) {
         lock_guard<mutex> lock(logger->GetLock());
 
-        if (logger->GetName() == loggerName)
+        if (logger->GetName() == loggerName) {
             return logger;
+        }
     }
     return nullptr;
 }
@@ -115,10 +116,11 @@ void Logger::RemoveLogger(const string& loggerName)
     while (loggerIdx != end(m_Loggers)) {
         lock_guard<mutex> lock((*loggerIdx)->GetLock());
 
-        if ((*loggerIdx)->GetName() == loggerName)
+        if ((*loggerIdx)->GetName() == loggerName) {
             loggerIdx = m_Loggers.erase(loggerIdx);
-        else
+        } else {
             ++loggerIdx;
+        }
     }
 }
 
@@ -129,7 +131,8 @@ void Logger::Print(LogEntry entry)
     for(const Logger::Ptr& logger : Logger::GetLoggers()) {
         lock_guard<mutex> lock(logger->GetLock());
 
-        if (entry.Severity >= logger->GetSeverity())
+        if (entry.Severity >= logger->GetSeverity()) {
             logger->ProcessLogEntry(entry);
+        }
     }
 }

@@ -170,11 +170,17 @@ Output:
     [2015-08-19 15:40:47] critical: This will be in app.log.1
     [2015-08-19 15:40:47] critical: This will be in app.log.2
 
+## Multithreading and Limitations
+
+- Multithreading support only supported when logging messages. Modifying logger 
+  attributes at run-time in a multi-threaded environment is currently not 
+  supported.
+
 ## TODO
 
 - Unit tests
 - Documentation (doxygen)
-- FileRotateLogger add compression
+- FileRotateLogger compression
 
 ## License
 

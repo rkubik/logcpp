@@ -1,14 +1,17 @@
 #include <logcpp/formatter/patternformatter.hpp>
+#include <logcpp/logger.hpp>
+#include <logcpp/helpers/utility.hpp>
 using namespace logcpp;
+using namespace logcpp::helpers;
 
 using namespace std;
 
-PatternFormatter::PatternFormatter() : Formatter()
-{
-}
-
-PatternFormatter::PatternFormatter(const string& format)
-: Formatter(format)
+PatternFormatter::PatternFormatter(
+    const string& format,
+    const string& datetimeFormat
+) :
+m_Format(format),
+m_DateTimeFormat(datetimeFormat)
 {
 }
 
@@ -34,4 +37,21 @@ string PatternFormatter::GetFormat(void) const
 string PatternFormatter::GetDateTimeFormat(void) const
 {
     return m_DateTimeFormat;
+}
+
+string PatternFormatter::Out(const string& loggerName, const LogEntry& entry) const
+{
+    string output = m_Format;
+
+    Utility::ReplaceAll(output, "%t", Utility::DateTimeFormat(entry.Timestamp, m_DateTimeFormat));
+    Utility::ReplaceAll(output, "%n", loggerName);
+    Utility::ReplaceAll(output, "%s", Logger::SeverityToString(entry.Severity));
+    Utility::ReplaceAll(output, "%f", entry.Facility);
+    Utility::ReplaceAll(output, "%l", entry.Line > 0 ? to_string(entry.Line) : "");
+    Utility::ReplaceAll(output, "%u", entry.Function);
+    Utility::ReplaceAll(output, "%i", entry.File);
+    Utility::ReplaceAll(output, "%j", Utility::Basename(entry.File));
+    Utility::ReplaceAll(output, "%m", entry.Message);
+
+    return output;
 }

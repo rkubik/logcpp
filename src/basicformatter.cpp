@@ -1,6 +1,10 @@
 #include <logcpp/formatter/basicformatter.hpp>
 using namespace logcpp;
 
-BasicFormatter::BasicFormatter() : Formatter("[%t] %s - %m")
+BasicFormatter::BasicFormatter() : PatternFormatter("[%t] %s - %m")
+{
+}
+
+BasicFormatter::~BasicFormatter()
 {
 }
