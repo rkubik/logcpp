@@ -22,8 +22,10 @@ public:
      * @param entry Log entry
      * @return String representation of log entry
      */
-    virtual std::string Out(const std::string& loggerName, 
+    virtual std::string Out(const std::string& loggerName,
                             const LogEntry& entry) const = 0;
+protected:
+    Formatter() {}
 };
 
 };

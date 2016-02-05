@@ -127,7 +127,8 @@ public:
 
     /**
      * Return a single logger by logger name. If logger is not found a nullptr
-     * is returned.
+     * is returned. If multiple loggers share the same name, the first logger
+     * found will be returned.
      *
      * @param loggerName Name of logger
      * @return Pointer to logger
