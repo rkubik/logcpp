@@ -1,10 +1,12 @@
 #include <logcpp/logger/sysloglogger.hpp>
+#include <logcpp/formatter/patternformatter.hpp>
 using namespace logcpp;
 
 #include <syslog.h>
 
 SyslogLogger::SyslogLogger()
 {
+    m_Formatter = PatternFormatter::Ptr(new PatternFormatter("%m"));
 }
 
 SyslogLogger::~SyslogLogger()
@@ -33,5 +35,5 @@ void SyslogLogger::ProcessLogEntry(const LogEntry& entry)
             break;
     }
 
-    syslog(severity | LOG_USER, "%s", entry.Message.c_str());
+    syslog(severity | LOG_USER, "%s", Out(entry).c_str());
 }

@@ -50,8 +50,9 @@ vector<string> Utility::FileGlob(const string& pattern)
 
     glob(pattern.c_str(), GLOB_TILDE, NULL, &glob_result);
 
-    for(size_t i = 0; i < glob_result.gl_pathc; ++i)
+    for(size_t i = 0; i < glob_result.gl_pathc; ++i) {
         results.push_back(glob_result.gl_pathv[i]);
+    }
 
     globfree(&glob_result);
 

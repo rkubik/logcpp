@@ -4,6 +4,7 @@
 #include <logcpp/formatter/basicformatter.hpp>
 using namespace logcpp;
 using namespace logcpp::helpers;
+
 using namespace std;
 
 set<Logger::Ptr> Logger::m_Loggers;
@@ -18,6 +19,11 @@ m_Formatter(new BasicFormatter())
 
 Logger::~Logger(void)
 {
+}
+
+string Logger::Out(const LogEntry& entry) const
+{
+    return m_Formatter->Out(m_Name, entry);
 }
 
 mutex& Logger::GetLock(void)
@@ -70,24 +76,26 @@ string Logger::SeverityToString(LogSeverity severity)
 
 LogSeverity Logger::StringToSeverity(const string& severity)
 {
-    if (severity == "debug")
+    if (severity == "debug") {
         return LogDebug;
-    else if (severity == "notice")
+    } else if (severity == "notice") {
         return LogNotice;
-    else if (severity == "information")
+    } else if (severity == "information") {
         return LogInformation;
-    else if (severity == "warning")
+    } else if (severity == "warning") {
         return LogWarning;
-    else if (severity == "critical")
+    } else if (severity == "critical") {
         return LogCritical;
-    else
+    } else {
         throw LogcppException("Invalid severity");
+    }
 }
 
 Logger::Ptr Logger::GetLogger(const string& loggerName)
 {
-    for(const Logger::Ptr& logger : Logger::GetLoggers()) {
-        lock_guard<mutex> lock(logger->GetLock());
+    lock_guard<mutex> l(m_LMutex);
+    for(const Logger::Ptr logger : Logger::GetLoggers()) {
+        lock_guard<mutex> l(logger->GetLock());
 
         if (logger->GetName() == loggerName) {
             return logger;
@@ -98,23 +106,23 @@ Logger::Ptr Logger::GetLogger(const string& loggerName)
 
 set<Logger::Ptr> Logger::GetLoggers(void)
 {
-    lock_guard<mutex> lock(m_LMutex);
+    lock_guard<mutex> l(m_LMutex);
     return m_Loggers;
 }
 
 void Logger::AddLogger(Logger::Ptr logger)
 {
-    lock_guard<mutex> lock(m_LMutex);
+    lock_guard<mutex> l(m_LMutex);
     m_Loggers.insert(logger);
 }
 
 void Logger::RemoveLogger(const string& loggerName)
 {
-    lock_guard<mutex> lock(m_LMutex);
+    lock_guard<mutex> l(m_LMutex);
     auto loggerIdx = begin(m_Loggers);
 
     while (loggerIdx != end(m_Loggers)) {
-        lock_guard<mutex> lock((*loggerIdx)->GetLock());
+        lock_guard<mutex> l((*loggerIdx)->GetLock());
 
         if ((*loggerIdx)->GetName() == loggerName) {
             loggerIdx = m_Loggers.erase(loggerIdx);
@@ -129,7 +137,7 @@ void Logger::Print(LogEntry entry)
     entry.Timestamp = Utility::GetTime();
 
     for(const Logger::Ptr& logger : Logger::GetLoggers()) {
-        lock_guard<mutex> lock(logger->GetLock());
+        lock_guard<mutex> l(logger->GetLock());
 
         if (entry.Severity >= logger->GetSeverity()) {
             logger->ProcessLogEntry(entry);

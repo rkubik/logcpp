@@ -90,6 +90,16 @@ public:
     void SetFormatter(Formatter::Ptr format);
 
     /**
+     *  Convenience Out function to set logger name.
+     *
+     * @param entry Log entry
+     *
+     * @return log entry in string format based on formatter
+     */
+    std::string Out(const LogEntry& entry) const;
+
+public:
+    /**
      * Convert severity to string. If severity is not found a LogcppException
      * will be thrown.
      *

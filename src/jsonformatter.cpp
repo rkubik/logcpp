@@ -8,7 +8,6 @@ using namespace logcpp::helpers;
 #include <sstream>
 #include <algorithm>
 #include <map>
-
 using namespace std;
 
 JsonFormatter::JsonFormatter(vector<string> attributes) 
@@ -41,8 +40,8 @@ string JsonFormatter::Out(const string& loggerName, const LogEntry& entry) const
     map<string, pair<string, bool>>::iterator iter;
 
     for (iter = attr.begin(); iter != attr.end(); ++iter) {
-        if (m_Attributes.empty() || std::any_of(m_Attributes.cbegin(), 
-                                                m_Attributes.cend(), 
+        if (m_Attributes.empty() || any_of(m_Attributes.cbegin(), 
+                                           m_Attributes.cend(),
             [iter](const string &attribute) {
                 return attribute == (*iter).first;
             }))
@@ -62,7 +61,7 @@ string JsonFormatter::Out(const string& loggerName, const LogEntry& entry) const
     return "{" + ss.str() + "}";
 }
 
-std::string JsonFormatter::Wrap(std::string str)
+string JsonFormatter::Wrap(string str)
 {
     Utility::ReplaceAll(str, "\"", "\\\"\"");
     return  "\"" + str + "\"";
