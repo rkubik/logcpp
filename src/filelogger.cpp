@@ -45,8 +45,9 @@ size_t FileLogger::GetFileSize(void)
 
     stream.open(GetPath(), fstream::binary);
 
-    if (!stream.good())
+    if (!stream.good()) {
         return 0;
+    }
 
     stream.seekg(0, fstream::end);
 
@@ -61,8 +62,9 @@ void FileLogger::ReopenLogFile(void)
         stream->open(GetPath(), m_Append ? fstream::app : fstream::trunc |
             fstream::out);
 
-        if (!stream->good())
+        if (!stream->good()) {
             throw LogcppException("Could not open logfile '" + GetPath() + "'");
+        }
     } catch (const exception &e) {
         delete stream;
         throw LogcppException(e.what());
@@ -78,8 +80,9 @@ void FileLogger::CloseLogFile(void)
 
 void FileLogger::ProcessLogEntry(const LogEntry& entry)
 {
-    if (!GetStream())
+    if (!GetStream()) {
         ReopenLogFile();
+    }
 
     StreamLogger::ProcessLogEntry(entry);
 }

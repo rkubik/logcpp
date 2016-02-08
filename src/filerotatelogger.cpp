@@ -55,8 +55,9 @@ string FileRotateLogger::BackupName(size_t idx)
 
 void FileRotateLogger::RotateLogFile(void)
 {
-    if (GetFileSize() < GetMaxSize())
+    if (GetFileSize() < GetMaxSize()) {
         return;
+    }
 
     vector<string> logFiles = Utility::FileGlob(GetPath() + BACKUP_DELIMETER +
         "*");
@@ -65,10 +66,11 @@ void FileRotateLogger::RotateLogFile(void)
     if (logFileId >= GetMaxBackup()) {
         size_t idx = 1;
         for (size_t i = 0; i < logFiles.size(); ++i) {
-            if (logFiles.size() - i >= GetMaxBackup())
+            if (logFiles.size() - i >= GetMaxBackup()) {
                 remove(logFiles[i].c_str());
-            else
+            } else {
                 rename(logFiles[i].c_str(), BackupName(idx++).c_str());
+            }
         }
         logFileId = idx;
     }
