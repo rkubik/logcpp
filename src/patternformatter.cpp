@@ -9,9 +9,17 @@ using namespace std;
 PatternFormatter::PatternFormatter(
     const string& format,
     const string& datetimeFormat
-) :
+)
+:
 m_Format(format),
 m_DateTimeFormat(datetimeFormat)
+{
+}
+
+PatternFormatter::PatternFormatter()
+:
+m_Format("[%t] %s - %m"),
+m_DateTimeFormat("%Y-%m-%d %H:%M:%S")
 {
 }
 

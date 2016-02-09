@@ -6,7 +6,7 @@ using namespace logcpp;
 
 SyslogLogger::SyslogLogger()
 {
-    m_Formatter = PatternFormatter::Ptr(new PatternFormatter("%m"));
+    m_Formatter = PatternFormatter::Ptr(new PatternFormatter("%m", ""));
 }
 
 SyslogLogger::~SyslogLogger()

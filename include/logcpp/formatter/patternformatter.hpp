@@ -27,8 +27,9 @@ class PatternFormatter : public Formatter
 public:
     OBJECT_PTR(PatternFormatter);
 
-    PatternFormatter(const std::string& format = "[%t] %s - %m",
-                     const std::string& datetimeFormat="%Y-%m-%d %H:%M:%S");
+    PatternFormatter(const std::string& format,
+                     const std::string& datetimeFormat);
+    PatternFormatter();
     virtual ~PatternFormatter();
 
     void SetFormat(const std::string& format);
