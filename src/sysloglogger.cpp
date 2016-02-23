@@ -26,6 +26,9 @@ void SyslogLogger::ProcessLogEntry(const LogEntry& entry)
         case LogWarning:
             severity = LOG_WARNING;
             break;
+        case LogError:
+            severity = LOG_ERR;
+            break;
         case LogCritical:
             severity = LOG_CRIT;
             break;

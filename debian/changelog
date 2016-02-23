@@ -1,3 +1,11 @@
+logcpp (0.1.2) unstable; urgency=medium
+
+  * Logger::MakeLogger() helper
+  * New LogError severity
+  * New LogOff severity to silence loggers
+
+ -- Russ Kubik <russkubik@gmail.com>  Tue, 23 Feb 2016 12:55:36 -0600
+
 logcpp (0.1.1) unstable; urgency=medium
 
   * Formatter and FileRotateLogger virtual methods for more control

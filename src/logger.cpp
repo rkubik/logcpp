@@ -67,6 +67,8 @@ string Logger::SeverityToString(LogSeverity severity)
             return "information";
         case LogWarning:
             return "warning";
+        case LogError:
+            return "error";
         case LogCritical:
             return "critical";
         default:
@@ -84,6 +86,8 @@ LogSeverity Logger::StringToSeverity(const string& severity)
         return LogInformation;
     } else if (severity == "warning") {
         return LogWarning;
+    } else if (severity == "error") {
+        return LogError;
     } else if (severity == "critical") {
         return LogCritical;
     } else {

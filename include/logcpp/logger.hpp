@@ -18,6 +18,7 @@ namespace logcpp {
 #define LOG_NOTICE LOG(logcpp::LogNotice)
 #define LOG_INFO LOG(logcpp::LogInformation)
 #define LOG_WARN LOG(logcpp::LogWarning)
+#define LOG_ERROR LOG(logcpp::LogError)
 #define LOG_CRIT LOG(logcpp::LogCritical)
 
 enum LogSeverity
@@ -26,7 +27,9 @@ enum LogSeverity
     LogNotice,
     LogInformation,
     LogWarning,
-    LogCritical
+    LogError,
+    LogCritical,
+    LogOff
 };
 
 struct LogEntry {
@@ -148,6 +151,17 @@ public:
      * @param logger Pointer to logger
      */
     static void AddLogger(Logger::Ptr logger);
+
+    /**
+     * Add new logger to global scope and return it.
+     */
+    template <typename T>
+    static std::shared_ptr<T> MakeLogger()
+    {
+        std::shared_ptr<T> logger = std::make_shared<T>();
+        AddLogger(logger);
+        return logger;
+    }
 
     /**
      * Remove logger from global scope by logger name.
