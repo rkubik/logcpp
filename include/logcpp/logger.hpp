@@ -34,10 +34,11 @@ enum LogSeverity
 
 struct LogEntry {
     double Timestamp;
+    size_t Milliseconds;
     LogSeverity Severity;
     std::string Facility;
     std::string Message;
-    int Line = 0;
+    size_t Line = 0;
     std::string Function;
     std::string File;
 };

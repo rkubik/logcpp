@@ -139,6 +139,7 @@ void Logger::RemoveLogger(const string& loggerName)
 void Logger::Print(LogEntry entry)
 {
     entry.Timestamp = Utility::GetTime();
+    entry.Milliseconds = (entry.Timestamp - (int)  entry.Timestamp) * 1000;
 
     for(const Logger::Ptr& logger : Logger::GetLoggers()) {
         lock_guard<mutex> l(logger->GetLock());

@@ -8,11 +8,9 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-    const bool daemon = true;
-
     ConsoleLogger::Ptr logger = Logger::MakeLogger<ConsoleLogger>();
     PatternFormatter::Ptr formatter = PatternFormatter::Ptr(new PatternFormatter());
-    formatter->SetFormat("%t %j:%l [%s] %m");
+    formatter->SetFormat("%t.%i %j:%l [%s] %m");
     formatter->SetDateTimeFormat("%m-%d %H:%M:%S");
     logger->SetFormatter(formatter);
     logger->SetSeverity(LogDebug);

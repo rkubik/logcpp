@@ -1,19 +1,21 @@
-include_directories( .
-                     ${PROJECT_SOURCE_DIR}/include
-                     ${PROJECT_BINARY_DIR}
+include_directories(
+    .
+    ${PROJECT_SOURCE_DIR}/include
+    ${PROJECT_BINARY_DIR}
 )
 
-set( LIBSOURCES ${PROJECT_SOURCE_DIR}/src/logger.cpp
-                ${PROJECT_SOURCE_DIR}/src/streamlogger.cpp
-                ${PROJECT_SOURCE_DIR}/src/consolelogger.cpp
-                ${PROJECT_SOURCE_DIR}/src/sysloglogger.cpp
-                ${PROJECT_SOURCE_DIR}/src/filelogger.cpp
-                ${PROJECT_SOURCE_DIR}/src/filerotatelogger.cpp
-                ${PROJECT_SOURCE_DIR}/src/basicformatter.cpp
-                ${PROJECT_SOURCE_DIR}/src/patternformatter.cpp
-                ${PROJECT_SOURCE_DIR}/src/jsonformatter.cpp
-                ${PROJECT_SOURCE_DIR}/src/utility.cpp
-                ${PROJECT_SOURCE_DIR}/src/exception.cpp
+set( LIBSOURCES
+    ${PROJECT_SOURCE_DIR}/src/logger.cpp
+    ${PROJECT_SOURCE_DIR}/src/streamlogger.cpp
+    ${PROJECT_SOURCE_DIR}/src/consolelogger.cpp
+    ${PROJECT_SOURCE_DIR}/src/sysloglogger.cpp
+    ${PROJECT_SOURCE_DIR}/src/filelogger.cpp
+    ${PROJECT_SOURCE_DIR}/src/filerotatelogger.cpp
+    ${PROJECT_SOURCE_DIR}/src/basicformatter.cpp
+    ${PROJECT_SOURCE_DIR}/src/patternformatter.cpp
+    ${PROJECT_SOURCE_DIR}/src/jsonformatter.cpp
+    ${PROJECT_SOURCE_DIR}/src/utility.cpp
+    ${PROJECT_SOURCE_DIR}/src/exception.cpp
 )
 
 add_library( liblogcpp SHARED ${LIBSOURCES} )

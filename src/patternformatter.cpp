@@ -52,6 +52,7 @@ string PatternFormatter::Out(const string& loggerName, const LogEntry& entry) co
     string output = m_Format;
 
     Utility::ReplaceAll(output, "%t", Utility::DateTimeFormat(entry.Timestamp, m_DateTimeFormat));
+    Utility::ReplaceAll(output, "%i", to_string(entry.Milliseconds));
     Utility::ReplaceAll(output, "%n", loggerName);
     Utility::ReplaceAll(output, "%s", Logger::SeverityToString(entry.Severity));
     Utility::ReplaceAll(output, "%f", entry.Facility);

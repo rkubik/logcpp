@@ -10,6 +10,7 @@ namespace logcpp {
  * substitution:
  *
  * %t - Timestamp (based on m_DateTimeFormat)
+ * %i - Milliseconds
  * %n - Logger name
  * %s - Logger severity (string representation)
  * %f - Logger facility (scope)
