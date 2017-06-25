@@ -1,6 +1,6 @@
+#include <utility.hpp>
 #include <logcpp/formatter/patternformatter.hpp>
 #include <logcpp/logger.hpp>
-#include <logcpp/helpers/utility.hpp>
 using namespace logcpp;
 using namespace logcpp::helpers;
 

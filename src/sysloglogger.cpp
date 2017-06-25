@@ -16,6 +16,7 @@ SyslogLogger::~SyslogLogger()
 void SyslogLogger::ProcessLogEntry(const LogEntry& entry)
 {
     int severity;
+
     switch (entry.Severity) {
         case LogDebug:
             severity = LOG_DEBUG;

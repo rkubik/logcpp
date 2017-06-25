@@ -15,7 +15,7 @@ int main(int argc, char* argv[])
     if (daemon) {
         /* daemonize */
         FileLogger::Ptr fl = Logger::MakeLogger<FileLogger>();
-        fl->SetPath("/tmp/test.log");
+        fl->SetPath("test.log");
         logger = fl;
     } else {
         logger = Logger::MakeLogger<ConsoleLogger>();

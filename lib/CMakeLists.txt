@@ -1,6 +1,7 @@
 include_directories(
     .
     ${PROJECT_SOURCE_DIR}/include
+    ${PROJECT_SOURCE_DIR}/src
     ${PROJECT_BINARY_DIR}
 )
 
@@ -21,7 +22,7 @@ set( LIBSOURCES
 add_library( liblogcpp SHARED ${LIBSOURCES} )
 
 set_target_properties( liblogcpp PROPERTIES
-  COMPILE_FLAGS  "-fPIC -Wall -ggdb -pthread -O2 -std=c++11"
+  COMPILE_FLAGS  "-fPIC -pthread -O2"
   VERSION "${PACKAGE_MINOR}.${PACKAGE_PATCH}"
   SOVERSION "${PACKAGE_MAJOR}"
   OUTPUT_NAME logcpp

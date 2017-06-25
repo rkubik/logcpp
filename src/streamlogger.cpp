@@ -1,5 +1,5 @@
+#include <utility.hpp>
 #include <logcpp/logger/streamlogger.hpp>
-#include <logcpp/helpers/utility.hpp>
 using namespace logcpp;
 
 using namespace std;

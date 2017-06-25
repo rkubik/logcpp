@@ -1,6 +1,6 @@
+#include <utility.hpp>
 #include <logcpp/logger.hpp>
 #include <logcpp/helpers/exception.hpp>
-#include <logcpp/helpers/utility.hpp>
 #include <logcpp/formatter/basicformatter.hpp>
 using namespace logcpp;
 using namespace logcpp::helpers;
@@ -90,14 +90,14 @@ LogSeverity Logger::StringToSeverity(const string& severity)
         return LogError;
     } else if (severity == "critical") {
         return LogCritical;
-    } else {
-        throw LogcppException("Invalid severity");
     }
+    throw LogcppException("Invalid severity");
 }
 
 Logger::Ptr Logger::GetLogger(const string& loggerName)
 {
     lock_guard<mutex> l(m_LMutex);
+
     for(const Logger::Ptr logger : Logger::GetLoggers()) {
         lock_guard<mutex> l(logger->GetLock());
 
@@ -105,6 +105,7 @@ Logger::Ptr Logger::GetLogger(const string& loggerName)
             return logger;
         }
     }
+
     return nullptr;
 }
 

@@ -1,6 +1,6 @@
+#include <utility.hpp>
 #include <logcpp/logger/filerotatelogger.hpp>
 #include <logcpp/helpers/exception.hpp>
-#include <logcpp/helpers/utility.hpp>
 using namespace logcpp;
 using namespace logcpp::helpers;
 
@@ -12,6 +12,8 @@ using namespace logcpp::helpers;
 using namespace std;
 
 const char FileRotateLogger::BACKUP_DELIMETER = '.';
+const size_t FileRotateLogger::DEFAULT_MAX_BACKUP = 5;
+const size_t FileRotateLogger::DEFAULT_MAX_SIZE = 10485760; /* bytes (10MB) */
 
 FileRotateLogger::FileRotateLogger(const string& path)
 : FileLogger(path)
@@ -21,8 +23,8 @@ FileRotateLogger::FileRotateLogger(const string& path)
 
 FileRotateLogger::FileRotateLogger()
 :
-m_Backup(1),
-m_Size(10000000)
+m_Backup(FileRotateLogger::DEFAULT_MAX_BACKUP),
+m_Size(FileRotateLogger::DEFAULT_MAX_SIZE)
 {
 }
 
@@ -59,8 +61,7 @@ void FileRotateLogger::RotateLogFile(void)
         return;
     }
 
-    vector<string> logFiles = Utility::FileGlob(GetPath() + BACKUP_DELIMETER +
-        "*");
+    vector<string>logFiles = Utility::FileGlob(GetPath() + BACKUP_DELIMETER + "*");
     size_t logFileId = logFiles.size() + 1;
 
     if (logFileId >= GetMaxBackup()) {
@@ -77,7 +78,6 @@ void FileRotateLogger::RotateLogFile(void)
 
     if (GetMaxBackup() > 0) {
         CloseLogFile();
-
         rename(GetPath().c_str(), BackupName(logFileId).c_str());
     }
 }
@@ -85,6 +85,5 @@ void FileRotateLogger::RotateLogFile(void)
 void FileRotateLogger::ProcessLogEntry(const LogEntry& entry)
 {
     FileLogger::ProcessLogEntry(entry);
-
     RotateLogFile();
 }

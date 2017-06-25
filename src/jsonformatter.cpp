@@ -1,6 +1,6 @@
+#include <utility.hpp>
 #include <logcpp/formatter/jsonformatter.hpp>
 #include <logcpp/logger.hpp>
-#include <logcpp/helpers/utility.hpp>
 using namespace logcpp;
 using namespace logcpp::helpers;
 
@@ -36,7 +36,7 @@ string JsonFormatter::Out(const string& loggerName, const LogEntry& entry) const
         {"function",  {entry.Function, false}},
         {"file",      {Utility::Basename(entry.File), false}}
     };
-    
+
     map<string, pair<string, bool>>::iterator iter;
 
     for (iter = attr.begin(); iter != attr.end(); ++iter) {

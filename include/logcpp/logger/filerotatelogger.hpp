@@ -46,6 +46,8 @@ protected:
 
 private:
     const static char BACKUP_DELIMETER;
+    const static size_t DEFAULT_MAX_BACKUP;
+    const static size_t DEFAULT_MAX_SIZE;
 
     /**
      * Return backup filename based on the backup index.
